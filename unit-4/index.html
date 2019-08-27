@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Unit-4 Timing</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+		}
+
+		#rainbow {
+			--size: 50px;
+			--hue: 0;
+			font-size: 0;
+		}
+
+		.fuse {
+			transition: all .3s;
+			height: var(--size);
+			width: var(--size);
+			background: hsl(var(--hue), 90%, 70%);
+			display: inline-block;
+			transform: scale(0);
+			border-radius: 50%;
+		}
+
+		#howManyRainbowStripsDoYouWantHeu {
+			padding: 0.5em;
+			width: 2em;
+			margin-bottom: 0.2em;
+			font-size: 2em;
+			border: 1px solid #eee;
+			border-radius: 0.1em;
+		}
+
+		button {
+			font-size: 2em;
+			border: 1px solid #eee;
+			border-radius: 0.1em;
+			padding: 0.5em;
+		}
+	</style>
+</head>
+
+<body>
+	<input type="number" id="howManyRainbowStripsDoYouWantHeu" min="0" max="999" value="60">
+	<button onclick="rainbowHaiDooNoy()">Go!</button>
+	<button onclick="playHaiDooNoy()">Play!</button>
+	<button onclick="stopHaiDooNoy()">Stop!</button>
+	<div id="rainbow">
+	</div>
+	<script type="text/javascript">
+		rainbowHaiDooNoy();
+		function rainbowHaiDooNoy() {
+			theNum = howManyRainbowStripsDoYouWantHeu.value;
+			rainbow.innerHTML = '';
+			for (let i = 0; i < theNum; i++) {
+				rainbow.innerHTML += `<div class="fuse" style="--hue:${i * (360 / theNum)}"></div>`;
+			}
+			fuse = document.getElementsByClassName('fuse');
+			for (let i = 0; i < theNum; i++) {
+				window.setTimeout(() => {
+					fuse[i].style.transform = 'scale(1)';
+				}, 20 * i);
+			}
+			setTimeout(() => {
+				playHaiDooNoy();
+			}, 20 * theNum);
+		}
+
+		function playHaiDooNoy() {
+			// let fuse = document.getElementsByClassName('fuse');
+			let size = fuse.length;
+			j = size - 1;
+			k = 0;
+			inter = setInterval(() => {
+				if (k >= size) { k = 0 }
+				if (j >= size) { j = 0 }
+
+				fuse[k].style.transform = 'scale(2)'
+				fuse[j].style.transform = 'scale(1)'
+
+				k++;
+				j++;
+			}, 300);
+		}
+		function stopHaiDooNoy() {
+			// let fuse = document.getElementsByClassName('fuse');
+			clearInterval(inter);
+			fuse[j].style.transform = 'scale(1)'
+		}
+	</script>
+</body>
+
+</html>
