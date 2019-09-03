@@ -1,0 +1,80 @@
+body{
+    margin: 0;
+    overflow: hidden;
+}
+.title{
+    text-align: center;
+    font-size: 3em;
+    height: 100vh;
+    color: white;
+    transition: 0.5s;
+    /* overflow: hidden; */
+}
+.title div{
+    font-family: 'Kanit', sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    animation: topFade 0.5s;
+}
+.profile{
+    text-align: center;
+    font-size: 3em;
+    height: 100vh;
+    color: white;
+    transition: 0.5s;
+}
+#background-animation{
+    position: absolute;
+    top: 0;
+    background-color: rgb(117, 182, 117);
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+.next{
+    background-color: white;
+    position: absolute;
+    top: 70vh;
+    left: 50vw;
+    padding: 20px;
+    border-radius: 50%;
+    justify-content: center;
+    animation: leftFade 0.6s;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.next-button{
+    width: 30px;
+    height: 30px;
+    border-top: 5px black solid;
+    border-right: 5px black solid;
+    transform: rotate(45deg);
+}
+@keyframes leftFade{
+    from{
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+@keyframes topFade{
+    from{
+        transform: translateY(1000px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+.fadeIn{
+    animation: leftFade 0.6s;
+}
+.fadeOut{
+    animation: leftFade 0.6s reverse;
+}
