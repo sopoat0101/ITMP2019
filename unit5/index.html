@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Our User</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://jabont.com/jayss/jayss.css">
+	<style>
+		#u_fav {
+			opacity: 0.3;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body class="screen v-middle-flex">
+	<div class="to-center cont-pd">
+		<theboxes class="middle">
+			<box col="3" class="t-right padding-l">
+				<i class="fas fa-chevron-left" onclick="clickLeft()"></i>
+			</box>
+			<box col="6">
+				<div class="bg-white round shadow padding-l">
+					<div class="t-right">
+						<i class="fas fa-star cl-amber" id="u_fav" onclick="changeStar()"></i>
+					</div>
+					<img src="" class="circle shadow" id="u_img">
+					<sp></sp>
+					<!-- username -->
+					<h1 class="cl-purple-a4">@<span id="u_userName">_______</span></h1>
+					<!-- city -->
+					<h4><i class="fas fa-map-marker-alt"></i> <span id="u_city">_______</span></h4>
+					<sp></sp>
+					<!-- name -->
+					<h2 id="u_name">_______ _______</h2>
+					<!-- company -->
+					<p id="u_company">_______</p>
+					<p></p>
+					<sp></sp>
+					<p>
+						<!-- web -->
+						<i class="fas fa-globe-americas"></i> <a id="u_web" href="_______">_______</a> &nbsp;&nbsp;
+						<!-- email -->
+						<i class="fas fa-envelope"></i> <a id="u_email" href="mailto:_______">_______</a>
+					</p>
+
+				</div>
+			</box>
+			<box col="3" class="t-left padding-l">
+				<i class="fas fa-chevron-right" onclick="clickRight()"></i>
+			</box>
+		</theboxes>
+	</div>
+
+	<script type="text/javascript">
+
+		nowIndex = 0;
+		user = [];
+		userFav = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		fetch('https://jsonplaceholder.typicode.com/users')
+			.then(response => response.json())
+			.then(json => ready(json))
+
+		function ready(json) {
+			console.log(json);
+			// เขียนต่อ ให้ข้อมูลคนแรก ไปแสดงผลบนหน้าเว็บ
+			user = json;
+			if (localStorage.nowIndex != undefined) nowIndex = localStorage.nowIndex
+			if (localStorage.userFav != undefined) userFav = JSON.parse(localStorage.userFav)
+			render();
+		}
+
+		function clickRight() {
+			// เลื่อนไปด้านขวา เช่นจาก id1 ไป id2 ถ้าเป็น id10 แล้วกดอีกจะกลับไป id1
+			nowIndex--;
+			if (nowIndex < 0) nowIndex = user.length - 1;
+			localStorage.nowIndex = nowIndex
+			render();
+		}
+
+		function clickLeft() {
+			// เลื่อนไปด้านซ้าย เช่นจาก id10 ไป id9 ถ้าเป็น id1 แล้วกดอีกจะกลับไป id1
+			nowIndex++;
+			if (nowIndex > user.length - 1) nowIndex = 0;
+			localStorage.nowIndex = nowIndex
+			render();
+		}
+
+		function render() {
+			u_img.src = `https://picsum.photos/id/${nowIndex}/200/200`
+			u_userName.innerText = user[nowIndex].username
+			u_city.innerText = user[nowIndex].address.city
+			u_name.innerText = user[nowIndex].name
+			u_company.innerText = user[nowIndex].company.name
+			u_web.innerText = user[nowIndex].website
+			u_web.href = "http://" + user[nowIndex].website
+			u_email.innerText = user[nowIndex].email
+			u_email.href = "mailto:" + user[nowIndex].email
+			checkStarFav(nowIndex)
+		}
+		function changeStar() {
+			if (u_fav.style.opacity == 1) {
+				u_fav.style.opacity = 0.3
+				keepList(nowIndex, 0);
+			}
+			else {
+				u_fav.style.opacity = 1
+				keepList(nowIndex, 1);
+			}
+		}
+		function keepList(item, status) {
+			userFav[item] = status;
+			pushArrayLocal(userFav)
+		}
+		function checkStarFav(item) {
+			if (userFav[item] == 1) u_fav.style.opacity = 1
+			else u_fav.style.opacity = 0.3
+		}
+		function pushArrayLocal(array) {
+			let text = JSON.stringify(array)
+			localStorage.userFav = text;
+		}
+	</script>
+</body>
+
+</html>
