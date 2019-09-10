@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method="GET" onsubmit="return register()">
+
+        <h2>ลงทะเบียนร่วมงาน</h2>
+
+        <input type="text" class="info" placeholder="รหัสนักศึกษา" required>
+
+        <input type="text" class="info" placeholder="ชื่อ" required>
+
+        <input type="text" class="info" placeholder="นามสกุล" required>
+
+        <input onclick="" type="submit">
+
+    </form>
+
+    <br>
+    <hr><br>
+
+    <table>
+
+        <thead>
+
+            <th>ลำดับที่</th>
+            <th>รหัสนักศึกษา</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+
+        </thead>
+
+        <tbody id="registerList">
+
+        </tbody>
+
+    </table>
+    <script>
+        function register() {
+            list = document.getElementById('registerList');
+            let input = document.getElementsByClassName('info');
+            let data = [(list.children.length + 1), input[0].value, input[1].value, input[2].value]
+
+            let tr = document.createElement('tr');
+
+            for (let i = 0; i < data.length; i++) {
+                let th = document.createElement('td');
+                th.innerText = data[i];
+                tr.appendChild(th);
+            }
+
+            list.appendChild(tr);
+
+            for (let i = 0; i < input.length; i++) {
+                input[i].value = "";
+            }
+
+            return false;
+
+        }</script>
+</body>
+
+</html>
