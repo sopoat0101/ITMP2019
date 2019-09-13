@@ -1,120 +1,354 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Catch the Bananas</title>
 	<meta charset=utf-8>
 	<meta name=description content="">
 	<meta name=viewport content="width=device-width, initial-scale=1">
-
+	<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Modak&display=swap" rel="stylesheet">
 	<style type="text/css">
-	body{
-		margin:0;
-		font-family: sans-serif;
-		background: black;
-	}
-	#wrap{
-		background: hsl(200,100%,90%);
-		width: 100%;
-		height: 90vh;
-		position: relative;
-	}
-	#control{
-		background: hsl(300,100%,70%);
-		width: 100%;
-		height: 10vh;
-		/*padding: 10px;*/
-		box-sizing: border-box;
-		display: flex;
-	}
-	.cmd{
-		height: 100%;
-		width: 50%;
-		font-size: 2em;
-	}
-	.fruit{
-		height: 20%;
-		width: 20%;
-		background-size: contain;
-		background-position: center;
-		background-repeat: no-repeat;
-		position: absolute;
-		top: 0%;
-		left: 0%;
-		transition: all .1s;
-	}
-	.f0{
-		background-image: url('f0.png');
-	}
-	.f1{
-		background-image: url('f1.png');
-	}
-	.f2{
-		background-image: url('f2.png');
-	}
-	.f3{
-		background-image: url('f3.png');
-	}
-	.f4{
-		background-image: url('f4.png');
-	}
-	#char{
-		background-image: url('char.png');
-		height: 20%;
-		width: 20%;
-		background-size: contain;
-		background-position: center bottom;
-		background-repeat: no-repeat;
-		position: absolute;
-		transition: all .1s;
-	}
-	[x="0"]{left:0%;}
-	[x="1"]{left:20%;}
-	[x="2"]{left:40%;}
-	[x="3"]{left:60%;}
-	[x="4"]{left:80%;}
-	[y="-1"]{top:-20%;}
-	[y="0"]{top:0%;}
-	[y="1"]{top:20%;}
-	[y="2"]{top:40%;}
-	[y="3"]{top:60%;}
-	[y="4"]{top:80%;}
-</style>
+		body {
+			margin: 0;
+			font-family: sans-serif;
+			font-family: 'Luckiest Guy', cursive;
+			background: black;
+		}
+
+		#wrap {
+			background: hsl(200, 100%, 90%);
+			width: 100%;
+			height: 90vh;
+			position: relative;
+			background-image: url('background.jpg');
+			background-size: cover;
+		}
+
+		#control {
+			background: hsl(300, 100%, 70%);
+			width: 100%;
+			height: 10vh;
+			/*padding: 10px;*/
+			box-sizing: border-box;
+			display: flex;
+		}
+
+		.cmd {
+			height: 100%;
+			width: 50%;
+			font-size: 2em;
+		}
+
+		.fruit {
+			height: 20%;
+			width: 20%;
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			position: absolute;
+			top: 0%;
+			left: 0%;
+			transition: all .1s;
+		}
+
+		.f0 {
+			background-image: url('f0.png');
+		}
+
+		.f1 {
+			background-image: url('f1.png');
+		}
+
+		.f2 {
+			background-image: url('f2.png');
+		}
+
+		.f3 {
+			background-image: url('f3.png');
+		}
+
+		.f4 {
+			background-image: url('f4.png');
+		}
+
+		#char {
+			background-image: url('monkey.png');
+			height: 20%;
+			width: 20%;
+			background-size: contain;
+			background-position: center bottom;
+			background-repeat: no-repeat;
+			position: absolute;
+			transition: all .1s;
+		}
+
+		#status {
+			width: 100%;
+			height: 10vh;
+			background-color: rgba(255, 255, 255, 0.39);
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+			display: grid;
+			grid-template-columns: auto auto auto auto;
+		}
+
+		#menu1 {
+			transform: scale(0)
+		}
+
+		#menu1,
+		#menu2 {
+			width: 100%;
+			height: 100vh;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10000;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* transform: scale(0); */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#game-name {
+			color: white;
+			justify-content: center;
+			display: flex;
+		}
+
+		.game-name {
+			color: white;
+			justify-content: center;
+			display: flex;
+		}
+
+		.game-name>div {
+			font-size: 2em;
+			background-color: black;
+			padding: 50px 100px;
+			margin: 20px;
+			border-radius: 1.25rem;
+			border: 3px solid white;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		#game-name>div {
+			font-size: 2em;
+			background-color: black;
+			padding: 50px 100px;
+			margin: 20px;
+			border-radius: 1.25rem;
+			border: 3px solid white;
+		}
+
+		button {
+			border: solid 0px;
+			background-color: rgb(0, 0, 0);
+			color: white;
+		}
+
+		.hp {
+			background-image: url('heart.png');
+			background-size: contain;
+			background-position: center bottom;
+			background-repeat: no-repeat;
+			width: 50px;
+			height: 50px;
+			display: inline-block;
+		}
+
+		#heart {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#time {
+			font-size: 3em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#point {
+			font-size: 3em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#callMenu {
+			font-size: 3em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.171);
+			background-color: black;
+			color: white;
+			user-select: none;
+			cursor: pointer;
+			transition: .3s;
+		}
+
+		#innerMenu1,
+		#innerMenu2 {
+			transition: 0.3s;
+		}
+
+		[x="0"] {
+			left: 0%;
+		}
+
+		[x="1"] {
+			left: 20%;
+		}
+
+		[x="2"] {
+			left: 40%;
+		}
+
+		[x="3"] {
+			left: 60%;
+		}
+
+		[x="4"] {
+			left: 80%;
+		}
+
+		[y="-1"] {
+			top: -20%;
+		}
+
+		[y="0"] {
+			top: 0%;
+		}
+
+		[y="1"] {
+			top: 20%;
+		}
+
+		[y="2"] {
+			top: 40%;
+		}
+
+		[y="3"] {
+			top: 60%;
+		}
+
+		[y="4"] {
+			top: 80%;
+		}
+	</style>
 </head>
+
 <body>
+	<div id="menu1">
+		<div id="innerMenu1">
+			<div id="game-name">
+				<div>Banana & Monkey</div>
+			</div>
+			<div class="game-name" onclick="setState(3)">
+				<div>Continue</div>
+			</div>
+			<div class="game-name" onclick="setState(0)">
+				<div>Exit</div>
+			</div>
+		</div>
+	</div>
+	<div id="menu2">
+		<div id="innerMenu2">
+			<div id="game-name">
+				<div>Banana & Monkey</div>
+			</div>
+			<div class="game-name" onclick="setState(1)">
+				<div>Play</div>
+			</div>
+		</div>
+	</div>
+	<div id="status">
+		<div id="heart">
+			<div id="innerHp">
+				<div class="hp"></div>
+				<div class="hp"></div>
+				<div class="hp"></div>
+			</div>
+		</div>
+		<div id="time">60 S</div>
+		<div id="point">0</div>
+		<div id="callMenu" onclick="setState(2)">MENU</div>
+	</div>
 	<div id="wrap">
 		<div id="char" x="0" y="4"></div>
 	</div>
 	<div id="control">
-		<button class="cmd" onclick="moveChar(-1)"><</button>
-		<button class="cmd" onclick="moveChar(+1)">></button>
+		<button class="cmd" onclick="moveChar(-1)">
+			<</button> <button class="cmd" onclick="moveChar(+1)">>
+		</button>
 	</div>
 
 	<script>
+		// State
+		//0 = Stop
+		//1 = Start
+		//2 = Pause
+		//3 = Play
+		STATE = 1;
 		nowID = 0;
-		
-		function gameStart(){
-			letplay = setInterval(function(){
-				newFruit();
-			},1000)
-			skyfall = setInterval(function(){
-				fallingSlowly();
-			},1000)
+		hp = 3;
+		score = 0;
+		timeCouter = 60;
+		checkStart = 0;
+		function gameStart() {
+			checkStart = 1;
+			//Hide menu
+			menu2.style.transform = 'scale(0)'
+			innerMenu2.style.transform = 'scale(0)'
+			//
+			text = "";
+			//define heart
+			for (let i = 0; i < hp; i++) {
+				text += `<div class="hp"></div>`
+			}
+			innerHp.innerHTML = text;
+			letplay = setInterval(function () {
+				if (STATE == 1 || STATE == 3) {
+					newFruit();
+					if (timeCouter <= 0) {
+						gameStop();
+					}
+					timeCouter--;
+				}
+			}, 1000)
+			skyfall = setInterval(function () {
+				if (STATE == 1 || STATE == 3) {
+					fallingSlowly();
+				}
+			}, 1000)
+			gameTick = setInterval(function () {
+				if (STATE == 1 || STATE == 3) {
+					checkCharHit();
+				}
+			}, 100)
 		}
-		function newFruit(){
+		function newFruit() {
 			let f = document.createElement("div");
 			f.setAttribute("x", rand(5));
 			f.setAttribute("y", -1);
-			f.setAttribute("class","fruit f"+rand(2));
-			f.setAttribute("id","fruit_"+nowID);
+			f.setAttribute("class", "fruit f" + rand(2));
+			f.setAttribute("id", "fruit_" + nowID);
 			wrap.appendChild(f);
 			nowID++;
 		}
-		function fallingSlowly(){
+		function fallingSlowly() {
 			let f = document.querySelectorAll(".fruit");
 			for (var i = 0; i < f.length; i++) {
 				let nowY = f[i].getAttribute("y");
 				nowY = parseInt(nowY);
-				f[i].setAttribute("y",nowY+1);
+				f[i].setAttribute("y", nowY + 1);
 				if (nowY == 4) {
 					//แก้เพิ่มตรงนี้
 					f[i].outerHTML = "";
@@ -122,7 +356,7 @@
 			}
 
 		}
-		function moveChar(step){
+		function moveChar(step) {
 			let nowX = char.getAttribute("x");
 			nowX = parseInt(nowX);
 			if (step == 1 && nowX == 4) {
@@ -131,15 +365,83 @@
 			if (step == -1 && nowX == 0) {
 				step = 0
 			}
-			char.setAttribute("x",nowX+step);
+			char.setAttribute("x", nowX + step);
 		}
 		function rand(max) {
 			return Math.floor(Math.random() * Math.floor(max));
 		}
 		function gameStop() {
+			checkStart = 0;
+			timeCouter = 60;
+			hp = 3;
 			clearInterval(letplay);
 			clearInterval(skyfall);
+			clearInterval(gameTick);
+			//clear fruit
+			let f = document.querySelectorAll(".fruit");
+			for (var i = 0; i < f.length; i++) {
+				f[i].outerHTML = "";
+			}
 		}
-	</script> 
+		function checkCharHit() {
+			let f = document.querySelectorAll(".fruit");
+			for (var i = 0; i < f.length; i++) {
+				if (f[i].getAttribute("class") == "fruit f0" &&
+					f[i].getAttribute('x') == char.getAttribute('x') &&
+					f[i].getAttribute('y') == char.getAttribute('y')) {
+					f[i].outerHTML = "";
+					hp--;
+					let divHP = document.getElementsByClassName('hp');
+					divHP[divHP.length - 1].outerHTML = "";
+					if (hp <= 0 || timeCouter <= 0) {
+						setState(0)
+					}
+				}
+				else if (f[i].getAttribute("class") != "fruit f0" &&
+					f[i].getAttribute('x') == char.getAttribute('x') &&
+					f[i].getAttribute('y') == char.getAttribute('y')) {
+					score++;
+					f[i].outerHTML = "";
+				}
+			}
+			point.innerHTML = score + ' Point';
+			time.innerHTML = timeCouter + ' s';
+		}
+		function setState(x) {
+			STATE = x;
+			if (x == 2) {
+				//
+				menu2.style.transform = 'scale(0)'
+				innerMenu2.style.transform = 'scale(0)'
+				menu1.style.transform = 'scale(1)'
+				innerMenu1.style.transform = 'scale(1)'
+				//
+			}
+			if (x == 0) {
+				//
+				menu1.style.transform = 'scale(0)'
+				innerMenu1.style.transform = 'scale(0)'
+				menu2.style.transform = 'scale(1)'
+				innerMenu2.style.transform = 'scale(1)'
+				gameStop()
+				//
+			}
+			if (x == 3) {
+				menu1.style.transform = 'scale(0)'
+				innerMenu1.style.transform = 'scale(0)'
+				menu2.style.transform = 'scale(0)'
+				innerMenu2.style.transform = 'scale(0)'
+			}
+			if (x == 1) {
+				menu1.style.transform = 'scale(0)'
+				innerMenu1.style.transform = 'scale(0)'
+				menu2.style.transform = 'scale(0)'
+				innerMenu2.style.transform = 'scale(0)'
+				gameStart();
+			}
+
+		}
+	</script>
 </body>
+
 </html>
