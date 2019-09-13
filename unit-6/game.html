@@ -393,7 +393,10 @@
 					hp--;
 					let divHP = document.getElementsByClassName('hp');
 					divHP[divHP.length - 1].outerHTML = "";
-					if (hp <= 0 || timeCouter <= 0) {
+					if (hp <= 0) {
+						setState(0)
+					}
+					else if (timeCouter <= 0) {
 						setState(0)
 					}
 				}
