@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
+body{
+    margin: 0;
+    background-color: #535E70;
+    font-family: 'Arvo', serif;
+    overflow: hidden;
+}
+nav{
+    width: 100vw;
+    height: 130px;
+    background-color: white;
+    /* position: sticky; */
+    top: 0;
+    z-index: 1000;
+    transform: translateZ(0px);
+}
+
+.logo{
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+.logo > img{
+    width: 60px;
+}
+a{
+    text-decoration: none;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+}
+.menu > span{
+    text-align: center;
+    width: 20%;
+    padding: 20px 0px;
+}
+.menu > span > a{
+    color: black;
+}
+.parallax-container{
+    overflow: hidden;
+    overflow-y: scroll;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100vh;
+}
+.background-animation{
+    /* height: 100vh; */
+    /* background-color: black; */
+    color: white;
+    z-index: -1;
+    display: flex;
+    transform: translateZ(-1px) scale(2);
+}
+.content{
+    height: 100vh;
+    /* background-color: rgb(255, 255, 255); */
+    color: black;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(0px);
+}
+.cloud{
+    position: absolute;
+}
+.cloud1{
+    left: 10%;
+}
+.cloud2{
+    right: 10%;
+}
+.cloud > img{
+    width: 700px;
+}
+
+/*  */
+
+@keyframes move-left{
+    from{
+        transform: translateX(-1000px)
+    }
+    to{
+        transform: translateX(0px)
+    }
+}
+@keyframes move-right{
+    from{
+        transform: translateX(1000px)
+    }
+    to{
+        transform: translateX(0px)
+    }
+}
+.move-left-in{
+    animation: move-left 1s;
+}
+
+.move-left-out{
+    animation: move-left 1s reverse;
+}
+.move-right-in{
+    animation: move-right 1s;
+}
+.move-right-out{
+    animation: move-right 1s reverse;
+}
